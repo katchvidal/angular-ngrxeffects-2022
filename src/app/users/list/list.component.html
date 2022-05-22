@@ -17,7 +17,7 @@
 <div class="bg-gray-100">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="max-w-2xl mx-auto py-16 sm:py-24 lg:py-32 lg:max-w-none">
-      <h2 class="text-2xl font-extrabold text-gray-900">Collections</h2>
+      <h2 class="text-2xl font-extrabold text-gray-900">Contact our team </h2>
 
       <div class="mt-6 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-6">
         <div class="group relative mt-2" *ngFor="let user of Users">
@@ -39,3 +39,16 @@
     </div>
   </div>
 </div>
+
+<section class="text-gray-600 body-font" *ngIf="loading">
+  <div class="container px-5 py-24 mx-auto ">
+    <div class="flex flex-wrap -m-4 place-content-center">
+      <div class="xl:w-1/4 md:w-1/2 p-16 ">
+        <div class=" p-6 rounded-lg text-center">
+          <img class="h-auto rounded-full animate-bounce w-full object-cover object-center mb-6" src="data:image/png;base64,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" alt="content">
+          <h2 class="text-lg text-gray-900 font-medium title-font mb-4 mt-20">Bounce - Espere Mientras Procesamos la Data </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

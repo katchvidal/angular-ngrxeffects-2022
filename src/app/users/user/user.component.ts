@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UserService } from 'src/app/services/users/user.service';
+import { Store } from '@ngrx/store';
+import { User } from 'src/app/models/users/user.model';
+import { AppState } from 'src/app/store/app.reducers';
+import * as OneUserAction from '../../store/actions'
 
 @Component({
   selector: 'app-user',
@@ -9,24 +12,25 @@ import { UserService } from 'src/app/services/users/user.service';
   ]
 })
 export class UserComponent implements OnInit {
-  idUser : any;
-  User: any;
-  constructor( private route: ActivatedRoute, private userService : UserService ) { }
+  User: any ;
+  error : any
+  constructor( private route: ActivatedRoute, private store : Store<AppState>) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(
       param => {
-        this.idUser = param['id']
-      }
-      
+        const id = param['id']
+        this.store.dispatch(OneUserAction.CARGAR_USUARIO({ id }))   
+      }     
     )
     
-    setTimeout(() => {
-      
-      this.userService.getSingleUserbyID( this.idUser ).subscribe(
-        res => this.User = res 
-      )
-    }, 2000);
+    this.store.select('user').subscribe(
+      user => {
+        console.log( user )
+        this.User = user.user
+        this.error = user.error
+      }
+    )
   }
 
 }

@@ -21,7 +21,7 @@ export class UserService {
     )
   }
 
-  getSingleUserbyID( id : number ){
+  getSingleUserbyID( id : any ){
     const URL = `${this.URLSingleUser}/${ id }`
     return this.http.get( URL ).pipe(
       map((user: any) => {
