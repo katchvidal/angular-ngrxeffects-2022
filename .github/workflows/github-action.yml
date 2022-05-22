@@ -30,3 +30,18 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: docs
         enable_jekyll: true
+    
+    - name: Deploy Github Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
+    
+    - name: Create Release With Asset
+      id: Release-AIO
+      uses: Hs1r1us/Release-AIO@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.ref }}
+        asset_files: './asset_file'
